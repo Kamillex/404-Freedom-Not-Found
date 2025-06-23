@@ -60,5 +60,38 @@ Moeda.prototype.verificarColeta = function(sparky) {
         console.log("Moeda coletada!");
     }
     
-    return this.coletada; // Retorna true se coletada, false caso contrário
+    return this.coletada;
+     // Retorna true se coletada, false caso contrário
+};
+Moeda.prototype.verificarColeta = function(sparky) {
+    if (this.coletada) return false;
+
+    // Verificações de segurança
+    if (
+        !sparky || 
+        !sparky.sheet || 
+        !sparky.sheet.imagem || 
+        !sparky.sheet.imagem.complete || 
+        !sparky.sheet.numColunas || 
+        !sparky.sheet.numLinhas
+    ) {
+        console.warn("Sprite do Sparky ainda não carregado completamente.");
+        return false;
+    }
+
+    let sparkyLargura = sparky.sheet.imagem.width / sparky.sheet.numColunas;
+    let sparkyAltura = sparky.sheet.imagem.height / sparky.sheet.numLinhas;
+
+    this.coletada = (
+        sparky.x < this.x + this.largura &&
+        sparky.x + sparkyLargura > this.x &&
+        sparky.y < this.y + this.altura &&
+        sparky.y + sparkyAltura > this.y
+    );
+
+    if (this.coletada) {
+        console.log("Moeda coletada!");
+    }
+
+    return this.coletada;
 };

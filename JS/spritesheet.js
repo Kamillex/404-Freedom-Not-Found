@@ -46,6 +46,8 @@ SpriteSheet.prototype = {
         let largura = this.imagem.width / this.numColunas;
         let altura = this.imagem.height / this.numLinhas;
 
+        
+
         // Desenha o frame recortado da imagem no contexto do canvas
         this.context.drawImage(
             this.imagem,

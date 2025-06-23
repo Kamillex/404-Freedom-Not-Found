@@ -15,7 +15,7 @@
     <script src="./JS/sparky2.js"></script>
 </head>
 <body>
-    <canvas id="meuCanvas" width="1989" height="939"></canvas>
+    <canvas id="meuCanvas" width="1990" height="950"></canvas>
     <audio id="audio" src="./SND/Música.mp3" loop></audio>
     <script>
         let canvas = document.getElementById('meuCanvas');
@@ -78,13 +78,15 @@ function gerarPlataformaComMoeda() {
     let y = 500 + Math.random() * 300; // Posição vertical aleatória
     
     let plataforma = new Plataforma(x, y, 120, 20);
-    let moeda = new Moeda(x + 45, y - 30, 30, 30); // 30x30 é o tamanho da moeda
+    // 30x30 é o tamanho da moeda
 
     plataformas.push(plataforma);
     moedas.push(moeda);
     
     console.log("Nova plataforma com moeda gerada em:", x, y);
 }
+
+
 ultimaGeracao = Date.now();
 
 imgSparky.onload = verificarCarregamento;
@@ -114,7 +116,7 @@ imgCenario.onload = verificarCarregamento;
 
   // Desenhar moedas e verificar coleta
   moedas = moedas.filter((moeda, i) => {
-      if (!moeda.coletada && moeda.verificarColeta(sparky)) {
+      if (!moeda.coletada && moeda.verificarColeta(Sparky)) {
           pontos++;
           return false;
       }
