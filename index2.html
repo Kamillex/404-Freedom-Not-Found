@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404:Freedom Not Found</title>
+    <link rel="stylesheet" href="CSS/style.css"></link>
+    <link rel="shortcut icon" type="imagex/png" href="IMG/Ícone .ico">
+    <script src="./JS/spritesheet.js"></script>
+    <script src="./JS/animacao.js"></script>
+    <script src="./JS/colisor.js"></script>
+    <script src="./JS/teclado.js"></script>
+    <script src="./JS/sparky.js"></script>
+</head>
+<body>
+    <canvas id="meuCanvas" width="1999" height="950"></canvas>
+    <script>
+        let canvas = document.getElementById('meuCanvas');
+        let context = canvas.getContext('2d');
+
+        function colidiu(sprite, bloco) {
+    return (
+        sprite.x < bloco.x + bloco.largura &&
+        sprite.x + sprite.sheet.imagem.width / sprite.sheet.numColunas > bloco.x &&
+        sprite.y < bloco.y + bloco.altura &&
+        sprite.y + sprite.sheet.imagem.height / sprite.sheet.numLinhas > bloco.y
+    );
+}
+
+
+        let teclado = new Teclado(document);
+        let animacao = new Animacao(context);
+        let vidas = 3;
+
+        let imgSparky = new Image();
+        imgSparky.src = "./IMG/Sparky.png";
+
+        let imgCenario = new Image();
+        imgCenario.src = "./IMG/Cidade.png"; ///////////////
+        let x = 0;
+        let velocidade = 2;
+
+       
+
+        animacao.novoSprite({
+        atualizar: function(){
+        },
+        desenhar: function(){
+            let larguraCenario = 1999;
+            let alturaCenario = 950;
+          
+            context.drawImage(imgCenario, 0, 0, larguraCenario, alturaCenario);
+
+        }
+      });
+      imgCenario.onload = function (){
+        animacao.ligar();
+      }
+
+      let sparky = new Sparky(context, teclado, imgSparky);
+      sparky.x = 0;
+      sparky.y = 700;
+      animacao.novoSprite(sparky);
+      imgSparky.onload = function(){
+        animacao.ligar();
+      };
+    </script>
+</body>
+</html>     
